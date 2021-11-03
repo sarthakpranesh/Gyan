@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+	"os"
 	"regexp"
 	"strings"
 	"sync"
@@ -8,6 +10,7 @@ import (
 
 	"github.com/gocolly/colly"
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 	"github.com/patrickmn/go-cache"
 )
 
@@ -19,6 +22,11 @@ type Gyan struct {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	app := fiber.New()
 	memCache := cache.New(24*time.Hour, 1*time.Hour)
 
@@ -88,5 +96,5 @@ func main() {
 		return c.JSON(info)
 	})
 
-	app.Listen(":8080")
+	app.Listen(":" + os.Getenv("PORT"))
 }
