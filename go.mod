@@ -1,4 +1,4 @@
-module Github/sarthakpranesh/Gyan
+module github.com/sarthakpranesh/Gyan
 
 go 1.16
 
