@@ -5,10 +5,10 @@ A simple API to fetch description from Wikipedia and images from Google about {Y
 <br />
 
 ## Usage
-Please consider hosting this API on your own server for high usage.
+Please consider hosting this API on your own server.
 
 
-`get gyanall.herokuapp.com/cat`
+`get /cat`
 ```json
     {
         "name": "cat",
