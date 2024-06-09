@@ -25,5 +25,17 @@ Please consider hosting this API on your own server.
 
 <br />
 
+## Self hosting
+
+Using pre-build image from docker hub
+```sh
+docker run -d --name gyan --restart unless-stopped -p 9090:9090 sarthakpranesh/gyan
+```
+
+Building your own docker image
+```sh
+docker build .
+```
+
 ## Issues
 If you find any bugs/issues please report them by opening a new issue [here](https://github.com/sarthakpranesh/Gyan/issues)

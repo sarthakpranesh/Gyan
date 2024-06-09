@@ -2,11 +2,12 @@ FROM golang:1.22.1-alpine3.19
 
 WORKDIR /gyan
 
-COPY . .
+COPY ./go.mod .
+RUN GOPROXY=https://proxy.golang.org/cached-only go mod download
 
-RUN go install
+COPY . .
 RUN go build 
-RUN chmod 777 ./Gyan
+RUN chmod 777 -R ./Gyan
 
 EXPOSE 9090
 

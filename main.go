@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"regexp"
@@ -45,7 +46,9 @@ func main() {
 		tmp, wasThere := memCache.Get(info.Name)
 		if wasThere {
 			info = tmp.(Gyan)
-			return c.JSON(info)
+			if info.Description != "" {
+				return c.JSON(info)
+			}
 		}
 
 		var wg sync.WaitGroup
@@ -65,6 +68,9 @@ func main() {
 		}()
 		go func() {
 			scrape := colly.NewCollector()
+			scrape.OnError(func(r *colly.Response, err error) {
+				fmt.Println(err.Error())
+			})
 			scrape.OnHTML(".mw-parser-output", func(h *colly.HTMLElement) {
 				var description string
 				h.ForEachWithBreak("p", func(i int, h *colly.HTMLElement) bool {
