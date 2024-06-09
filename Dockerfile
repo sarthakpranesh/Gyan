@@ -1,9 +1,9 @@
-FROM golang:1.22.1-alpine3.19
+FROM golang:1.16.15-alpine3.15
 
 WORKDIR /gyan
 
 COPY ./go.mod .
-RUN GOPROXY=https://proxy.golang.org/cached-only go mod download
+RUN GOPROXY=https://proxy.golang.org/cached-only go install
 
 COPY . .
 RUN go build 
