@@ -11,6 +11,7 @@ import (
 
 	"github.com/gocolly/colly"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 	"github.com/patrickmn/go-cache"
 )
@@ -30,6 +31,9 @@ func main() {
 
 	app := fiber.New()
 	memCache := cache.New(24*time.Hour, 1*time.Hour)
+
+	// Initialize default config
+	app.Use(logger.New())
 
 	// Server Info Route
 	app.Get("/", func(c *fiber.Ctx) error {
